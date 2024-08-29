@@ -111,11 +111,11 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product 
-    .update(req.body, {where: {id: req.params.id,},})
-    .then(response => {
-      res.json({status: 'success', payload: response})
-    })
-    .catch( err => res.status(500).json({status: 'error', payload: err.message}))
+  .destroy({where: { id: req.params.id}})
+  .then(response => {
+    res.json({status: 'success', payload: response})
+  })
+  .catch( err => res.status(500).json({status: 'error', payload: err.message}))
 });
 
 module.exports = router;
