@@ -6,12 +6,28 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', (req, res) => {
   // find all products
+  Product 
+    .findAll({
+      include: {model: Category, model: Tag}
+    })
+    .then(response => {
+      res.json({status: 'success', payload: response})
+    })
+    .catch( err => res.status(500).json({status: 'error', payload: err.message}))
   // be sure to include its associated Category and Tag data
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
+  Product
+    .findByPk(req.params.id, {
+      include: {model: Category, model: Tag}
+    })
+    .then(response => {
+      res.json({status: 'success', payload: response})
+    })
+    .catch( err => res.status(500).json({status: 'error', payload: err.message}))
   // be sure to include its associated Category and Tag data
 });
 
@@ -94,6 +110,12 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product 
+    .update(req.body, {where: {id: req.params.id,},})
+    .then(response => {
+      res.json({status: 'success', payload: response})
+    })
+    .catch( err => res.status(500).json({status: 'error', payload: err.message}))
 });
 
 module.exports = router;
