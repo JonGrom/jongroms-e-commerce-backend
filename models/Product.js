@@ -2,7 +2,7 @@
 const { Model, DataTypes } = require('sequelize');
 // import our database connection from config.js
 const sequelize = require('../config/connection');
-const { all } = require('../02-Challenge/Develop/routes/api/tag-routes');
+// const { all } = require('../02-Challenge/Develop/routes/api/tag-routes');
 
 // Initialize Product model (table) by extending off Sequelize's Model class
 class Product extends Model {}
@@ -18,7 +18,7 @@ Product.init(
       allowNull: false,
       autoIncrement: true
     },
-    productName: {
+    product_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -37,7 +37,7 @@ Product.init(
         isNumeric: true
       }
     },
-    categoryId: {
+    category_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'category',
